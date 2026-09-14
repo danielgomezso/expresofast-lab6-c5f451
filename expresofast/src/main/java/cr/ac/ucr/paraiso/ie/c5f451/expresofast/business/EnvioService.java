@@ -46,6 +46,18 @@ public class EnvioService {
 
     @Transactional
     public Envio registrarEnvio(Envio envio) {
+        if (envio == null) {
+            throw new IllegalArgumentException("El envío es obligatorio.");
+        }
+
+        if (envio.getVehiculo() == null || envio.getVehiculo().getId() == null) {
+            throw new IllegalArgumentException("Debe seleccionar un vehículo válido.");
+        }
+
+        if (envio.getConductor() == null || envio.getConductor().getId() == null) {
+            throw new IllegalArgumentException("Debe seleccionar un conductor válido.");
+        }
+
         Vehiculo vehiculo = vehiculoRepository.findById(envio.getVehiculo().getId())
                 .orElseThrow(() -> new IllegalArgumentException("El vehículo especificado no existe."));
 

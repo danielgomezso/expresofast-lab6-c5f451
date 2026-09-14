@@ -40,7 +40,8 @@ public class SecurityConfig {
                 "http://127.0.0.1:5500",
                 "http://localhost:5500",
                 "http://127.0.0.1:8080",
-                "http://localhost:8080"
+                "http://localhost:8080",
+                "null"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
@@ -69,7 +70,7 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
 
-                        .requestMatchers(HttpMethod.GET, "/api/envios/optimizado")
+                        .requestMatchers(HttpMethod.GET, "/api/envios/optimizados")
                         .hasAnyAuthority("ROLE_ADMIN", "ROLE_OPERADOR", "ROLE_CONDUCTOR")
                         .requestMatchers(HttpMethod.POST, "/api/envios").hasAnyAuthority("ROLE_ADMIN", "ROLE_OPERADOR")
                         .requestMatchers(HttpMethod.PATCH, "/api/envios/*/estado")
